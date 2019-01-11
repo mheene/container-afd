@@ -1,7 +1,5 @@
 # docker-afd
-
-This repository contains the a Dockerfile for [afd](https://github.com/holger24/AFD)
-It is currently fully experimental.
+This repository contains a Dockerfile for [afd](https://github.com/holger24/AFD)
 
 # Build the image
 docker build -t mheene/docker-afd .
