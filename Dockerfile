@@ -15,7 +15,7 @@ RUN	cd afd && ac-tools/bootstrap && \
 	./configure --enable-ssl --disable-dependency-tracking && \
 	make -j`nproc` && make install
 
-RUN	useradd afd -p afd
+RUN	useradd -ms /bin/bash afd 
 RUN	dnf remove -y gcc make automake git
 
 USER	afd
