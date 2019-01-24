@@ -3,7 +3,9 @@ LABEL 	maintainer="markus.heene@gmail.com"
 
 RUN	dnf install -q -b -y gcc make automake git\
 	motif motif-devel libXpm-devel libXaw-devel \
-	xorg-x11-fonts-misc openssl-devel 
+	xorg-x11-fonts-misc openssl-devel \
+	python2 python2-pygrib python2-numpy \
+	python2-matplotlib python2-basemap ImageMagick
 
 RUN	dnf -q -b -y --refresh --allowerasing update
 
@@ -21,9 +23,11 @@ RUN	dnf remove -q -y gcc make automake git
 USER	afd
 
 ENV 	AFD_WORK_DIR=/home/afd/local
-RUN	mkdir -p ~/local && mkdir -p ~/data
+RUN	mkdir -p ~/local && mkdir -p ~/data && mkdir -p ~/scripts
 
 COPY	./docker-entrypoint.sh /home/afd
+COPY	scripts/* /home/afd/scripts/
+
 ENTRYPOINT ["/home/afd/docker-entrypoint.sh"]
 CMD	["afd_ctrl"]
 

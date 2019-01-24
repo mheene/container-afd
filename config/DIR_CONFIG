@@ -1,0 +1,20 @@
+[directory]
+https://opendata.dwd.de/weather/nwp/icon-eu/grib/00/t_2m
+
+
+          [dir options]
+          do not remove
+          time * * * * *
+
+          [files]
+          icon-eu_europe_regular-lat-lon_single-level_*_0??_T_2M.grib2.bz2
+
+             [destination]
+
+               [recipient]
+               file://local//home/afd/data
+
+	       [options]
+	       exec bunzip2 %s
+	       exec python /home/afd/plotGRIB.py /home/afd/data
+	       convert -delay 100 -loop 0 `ls /home/afd/data/out*.png | sort` /home/afd/data/T2m_Movie.gif	       

@@ -10,7 +10,7 @@ install:
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"
 - sleep 3
-- docker run -d --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name afd --mount source=afd_work_dir,target=/home/afd/local --mount source=data,target=/home/afd/data mheene/docker-afd
+- docker run -d --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name afd --mount source=afd_work_dir,target=/home/afd/local --mount source=data,target=/home/afd/data mheene/docker-afd afd_ctrl
 
 
 script: docker ps | grep -q afd
