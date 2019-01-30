@@ -2,23 +2,19 @@ version: '3'
 services:
   afd:
     image: "mheene/docker-afd"
-    environment:
-      - DISPLAY=$DISPLAY
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./data:/home/afd/data
+      - data:/home/afd/data
     command: ["date"]
      
-
-#  nginx:
-#    image: "nginx"
-#    ports:
-#     - "8123:80"
-
   apache:
+    depends_on:
+     - afd
     image: "httpd"
     ports:
      - "8123:80"
     volumes:
-     - ./data:/usr/local/apache2/htdocs/
+     - data:/usr/local/apache2/htdocs/
+
+  volumes:
+   data:
      
