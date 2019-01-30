@@ -2,8 +2,7 @@
 This repository contains a Dockerfile for [afd](https://github.com/holger24/AFD)
 
 # Play with Docker
-Perhaps you don't have docker and you simply want to get a glimpse into it. Just try this (Docke\
-r account needed - you can create your Docker ID [here](https://hub.docker.com/) ):
+Perhaps you don't have docker and you simply want to get a glimpse into it. Just try this (Docker account needed - you can create your Docker ID [here](https://hub.docker.com/) ):
 
 [![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/mheene/docker-afd/master/stack.yml)
 
