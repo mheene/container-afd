@@ -1,5 +1,6 @@
 import os
 import sys
+from multiprocessing import Pool
 
 import matplotlib
 matplotlib.use('Agg')
@@ -11,7 +12,8 @@ import numpy as np
 import pygrib
 
 
-def plotGRIB(gribFile,directory):
+def plotGRIB(gribFile):
+    directory = sys.argv[1]
     plt.figure()
 
     grbs=pygrib.open(gribFile)
@@ -43,11 +45,11 @@ def plotGRIB(gribFile,directory):
     cs = m.pcolormesh(x,y,data,shading='flat',cmap=plt.cm.jet)
 
     m.drawcoastlines()
-    m.drawparallels(np.arange(-90.,120.,30.),labels=[1,0,0,0])
-    m.drawmeridians(np.arange(-180.,180.,60.),labels=[0,0,0,1])
+    m.drawparallels(np.arange(-90.,120.,10.),labels=[1,0,0,0])
+    m.drawmeridians(np.arange(-180.,180.,10.),labels=[0,0,0,1])
 
     plt.colorbar(cs,orientation='vertical')
-    plt.clim(230,320)
+    plt.clim(240,300)
     titleString = "%s T2m FStep(h): %d" % (date, forecastTime/60)
     plt.title(titleString)
     fileName = "out_%04d.png" % (forecastTime)
@@ -59,14 +61,20 @@ def plotGRIB(gribFile,directory):
 def main(argv):
 
     directory = argv[1]
+    myGRIBs = []
     for filename in os.listdir(directory):
         if filename.endswith(".grib2"):
-            plotGRIB(os.path.join(directory, filename),directory)
+            #plotGRIB(os.path.join(directory, filename),directory)
+            myGRIBs.append(os.path.join(directory, filename))
             continue
         else:
             continue
 
-        
+    p = Pool()
+    p.map(plotGRIB,myGRIBs)
+
+
+          
 if __name__ == "__main__":
     main(sys.argv)
 

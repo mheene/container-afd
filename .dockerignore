@@ -5,4 +5,5 @@
 # Dirs
 archive/
 test/
+.git/
 data/

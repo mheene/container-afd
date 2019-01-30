@@ -1,0 +1,22 @@
+version: '3'
+services:
+  afd:
+    build: .
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./data:/home/afd/data
+      
+#  nginx:
+#    image: "nginx"
+#    ports:
+#     - "8123:80"
+
+  apache:
+    image: "httpd"
+    ports:
+     - "8123:80"
+    volumes:
+     - ./data:/usr/local/apache2/htdocs/
+     
