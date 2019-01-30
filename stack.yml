@@ -3,7 +3,7 @@ services:
   afd:
     image: "mheene/docker-afd"
     volumes:
-      - data:/home/afd/data
+      - /tmp:/home/afd/data
     command: ["date"]
      
   apache:
@@ -13,6 +13,6 @@ services:
     ports:
      - "8123:80"
     volumes:
-     - data:/usr/local/apache2/htdocs/
+     - /tmp:/usr/local/apache2/htdocs/
 
      
