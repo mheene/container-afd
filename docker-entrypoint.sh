@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-afd -a
-cp ~/config/DIR_CONFIG_03 ~/local/etc/DIR_CONFIG
+
 touch ~/local/etc/DIR_CONFIG
+afd -a
 udc
 
 if [ "$1" = 'afd_ctrl' ]; then

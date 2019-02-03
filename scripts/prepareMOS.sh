@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/bin/bash -x
 # get the latest MOSMIX data from the DWD OpenData server
 #wget -N -P data https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_S_LATEST_240.kmz
+DIRECTORY=$4
+
+cp ~/scripts/meteogram_template.html ${DIRECTORY}/
+cd ${DIRECTORY}
 
 zcat data/MOSMIX_S_LATEST_240.kmz | xsltproc --stringparam station "${STATION}"     mos-filter.xsl - > data/MOSMIX_S_LATEST_240-de.kml
 
@@ -14,6 +18,4 @@ cat data/MOSMIX_S_LATEST_240-de.kml | xsltproc --stringparam station "${STATION}
 
 sed s/INPUTDATA/"data\/${STATION}.json"/ meteogram_template.html > meteogram_${STATION}.html
 
-#if [ ! -d "~/data/meteogram" ]; then
-#  mkdir -p ~/data/meteogram
-#fi
+mkdir -p ~/data/meteogram && cp -r * ~/data/meteogram/

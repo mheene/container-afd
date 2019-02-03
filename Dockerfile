@@ -31,12 +31,15 @@ RUN	mkdir -p ~/local && mkdir -p ~/data && \
 	mkdir -p ~/config && mkdir -p ~/tmp && cd ~/tmp && \
 	git clone https://github.com/buwx/meteogram.git meteogram
 
-COPY	./docker-entrypoint.sh /home/afd
-COPY	scripts/* /home/afd/scripts/
-COPY	config/* /home/afd/config/
 
-RUN	cp /home/afd/scripts/meteogram* /home/afd/tmp/meteogram/
-RUN	cp /home/afd/scripts/prepareMOS.sh /home/afd/tmp/meteogram/
+COPY	scripts/* /home/afd/scripts/
+COPY	config/DIR_CONFIG /home/afd/config/DIR_CONFIG
+COPY	./docker-entrypoint.sh /home/afd
+RUN	mkdir -p ~/local/etc && \
+	cp /home/afd/config/DIR_CONFIG ${AFD_WORK_DIR}/etc/DIR_CONFIG
+
+RUN	cp /home/afd/scripts/index.html /home/afd/data/index.html
+# RUN	cp /home/afd/scripts/prepareMOS.sh /home/afd/tmp/meteogram/
 
 
 
